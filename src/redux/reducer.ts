@@ -1,16 +1,17 @@
 import { AddItemAction, AnyAction } from './actions';
-import { defaultStore } from './defaultStore';
+import { loadStore, saveStore } from './defaultStore';
 import { ColumnItemType, StoreState } from './types';
 import { addItem, deepClone, getItem, nextColumnItemId } from './utils';
 
 export function reducer(store: StoreState | undefined, action: AnyAction): StoreState {
-  if (!store) return defaultStore;
+  if (!store) return loadStore();
   const copy = deepClone(store);
   switch (action.type) {
     case 'ADD_ITEM':
       addItemReducer(copy, action);
       break;
   }
+  saveStore(copy);
   return copy;
 }
 
