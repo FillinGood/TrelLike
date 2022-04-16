@@ -1,11 +1,5 @@
-import { ColumnItemCollection, ColumnItemType, ColumnType, StoreState } from './types';
-import {
-  addItem,
-  createCollection,
-  nextColumnId,
-  nextColumnItemId,
-  withItems
-} from './utils';
+import { ColumnItemType, ColumnType, StoreState } from './types';
+import { addItem, createCollection, nextColumnId, nextColumnItemId } from './utils';
 
 interface StorageStore {
   columns: StorageColumn[];
