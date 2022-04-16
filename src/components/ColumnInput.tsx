@@ -27,7 +27,10 @@ export default function ColumnInput(props: ColumnInputProps) {
     ref.current.innerHTML = '';
     setActive(false);
   }, []);
-  const onIdleClick = React.useCallback(() => setActive(true), []);
+  const onIdleClick = React.useCallback(() => {
+    setActive(true);
+    setTimeout(() => ref.current?.focus(), 0);
+  }, []);
 
   return (
     <div className={classNames('column-input', { active })}>
