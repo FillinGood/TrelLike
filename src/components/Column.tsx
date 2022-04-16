@@ -1,7 +1,5 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import classNames from 'classnames';
 import { StoreState, ColumnType } from '../redux/types';
 import { getItem } from '../redux/utils';
 import ColumnItem from './ColumnItem';
