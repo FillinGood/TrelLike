@@ -6,6 +6,7 @@ import { StoreState, ColumnType } from '../redux/types';
 import { getItem } from '../redux/utils';
 import ColumnItem from './ColumnItem';
 import { AddItemAction } from '../redux/actions';
+import ColumnInput from './ColumnInput';
 
 export interface ColumnProps {
   id: number;
@@ -18,29 +19,10 @@ export default function Column(props: ColumnProps) {
   );
   if (!column) return null;
 
-  const ref = React.useRef<HTMLDivElement>(null);
-
-  const [active, setActive] = React.useState(false);
-  const onKeyDown = React.useCallback(
-    (e: React.KeyboardEvent<HTMLDivElement>) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        if (!e.currentTarget.innerText) return;
-        dispatch(AddItemAction(column.id, e.currentTarget.innerText.trim()));
-        e.currentTarget.innerHTML = '';
-        setActive(false);
-      }
-    },
+  const onEnter = React.useCallback(
+    (v: string) => dispatch(AddItemAction(column.id, v)),
     [column.id]
   );
-  const onActiveClick = React.useCallback(() => {
-    if (!ref.current) return;
-    if (!ref.current.innerText) return;
-    dispatch(AddItemAction(column.id, ref.current.innerText.trim()));
-    ref.current.innerHTML = '';
-    setActive(false);
-  }, [column.id]);
-  const onIdleClick = React.useCallback(() => setActive(true), []);
 
   return (
     <div className="column">
@@ -52,18 +34,7 @@ export default function Column(props: ColumnProps) {
           <ColumnItem item={v} key={v.id} />
         ))}
       </div>
-      <div className={classNames('column-footer', { active })}>
-        <div className="column-footer--idle" onClick={onIdleClick}>
-          <FontAwesomeIcon icon={'plus'} />
-          Add card
-        </div>
-        <div className="column-footer--active">
-          <div className="textarea" contentEditable onKeyDown={onKeyDown} ref={ref} />
-          <div className="button-add-item" onClick={onActiveClick}>
-            Add
-          </div>
-        </div>
-      </div>
+      <ColumnInput onEnter={onEnter} label="Add new item" />
     </div>
   );
 }
