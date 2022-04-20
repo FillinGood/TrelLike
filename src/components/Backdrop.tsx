@@ -5,5 +5,12 @@ export interface BackdropProps {
 }
 
 export default function Backdrop(props: BackdropProps) {
-  return <div className="backdrop" onClick={props.onClick}></div>;
+  const onClick = React.useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      e.stopPropagation();
+      props.onClick?.();
+    },
+    [props.onClick]
+  );
+  return <div className="backdrop" onClick={onClick}></div>;
 }

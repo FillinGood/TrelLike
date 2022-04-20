@@ -15,6 +15,7 @@ export interface ColumnType {
 }
 
 export interface ColumnItemType {
+  columnID: number;
   id: number;
   value: string;
 }

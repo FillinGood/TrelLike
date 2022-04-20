@@ -4,6 +4,8 @@
 @import './ColumnInput';
 @import './NewColumn';
 @import './Backdrop';
+@import './Menu';
+@import './ColumnItemPanel';
 
 * {
   box-sizing: border-box;
@@ -14,4 +16,17 @@ body {
   height: 100vh;
   background: #1e1e1e;
   color: #cccccc;
+}
+
+#portal-root {
+  .panel-portal {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
 }

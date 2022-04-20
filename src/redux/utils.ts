@@ -31,10 +31,16 @@ export function createCollection<K extends CollectionKey, I>(): Collection<K, I>
 export function addItem<K extends CollectionKey, I>(
   c: Collection<K, I>,
   key: K,
-  item: I
+  item: I,
+  index?: number
 ) {
-  c.keys.push(key);
-  c.values.push(item);
+  if (index === undefined) {
+    c.keys.push(key);
+    c.values.push(item);
+  } else {
+    c.keys.splice(index, 0, key);
+    c.values.splice(index, 0, item);
+  }
 }
 
 export function withItem<K extends CollectionKey, I>(
@@ -73,6 +79,10 @@ export function withoutItem<K extends CollectionKey, I>(c: Collection<K, I>, key
   const copy = deepClone(c);
   removeItem(copy, key);
   return copy;
+}
+
+export function getIndex<K extends CollectionKey, I>(c: Collection<K, I>, key: K) {
+  return c.keys.findIndex((k) => k === key);
 }
 
 export function mapCollection<K extends CollectionKey, I, T>(

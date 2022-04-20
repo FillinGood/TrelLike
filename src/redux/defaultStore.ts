@@ -32,7 +32,11 @@ export function loadStore() {
       items: createCollection()
     };
     for (const i of col.items) {
-      const item: ColumnItemType = { id: nextColumnItemId(), value: i.value };
+      const item: ColumnItemType = {
+        columnID: column.id,
+        id: nextColumnItemId(),
+        value: i.value
+      };
       addItem(column.items, item.id, item);
     }
     addItem(store.columns, column.id, column);
