@@ -1,12 +1,14 @@
 export function deepClone<T>(obj: T): T {
   if (typeof obj === 'object') {
     if (Array.isArray(obj)) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const copy: any[] = [];
       for (const value of obj) {
         copy.push(deepClone(value));
       }
       return copy as unknown as T;
     } else {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const copy: any = {};
       for (const key in obj) {
         copy[key] = deepClone(obj[key]);

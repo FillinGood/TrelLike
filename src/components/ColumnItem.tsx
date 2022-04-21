@@ -3,7 +3,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { DelItemAction, InsertItemAction } from '../redux/actions';
 import { ColumnItemType, ColumnType, StoreState } from '../redux/types';
-import { addItem, getIndex, getItem } from '../redux/utils';
+import { getIndex, getItem } from '../redux/utils';
 import Backdrop from './Backdrop';
 import ColumnItemPanel from './ColumnItemPanel';
 import Menu from './Menu';
@@ -29,7 +29,7 @@ export default function ColumnItem(props: ColumnItemProps) {
     setEdit(true);
   }, []);
 
-  const onClick = React.useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+  const onClick = React.useCallback(() => {
     setPanelOpen(true);
   }, []);
 
