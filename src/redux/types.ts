@@ -18,4 +18,5 @@ export interface ColumnItemType {
   columnID: number;
   id: number;
   value: string;
+  description: string;
 }

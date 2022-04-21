@@ -5,12 +5,21 @@ export type AnyAction =
   | AddItemAction
   | DelItemAction
   | InsertItemAction
-  | AddColumnAction;
+  | AddColumnAction
+  | EditItemAction;
 
 export interface AddItemAction extends BaseAction {
   type: 'ADD_ITEM';
   columnID: number;
   value: string;
+}
+
+export interface EditItemAction extends BaseAction {
+  type: 'EDIT_ITEM';
+  columnID: number;
+  itemID: number;
+  value?: string;
+  description?: string;
 }
 
 export interface DelItemAction extends BaseAction {
@@ -33,6 +42,15 @@ export interface AddColumnAction extends BaseAction {
 
 export function AddItemAction(columnID: number, value: string) {
   return <AddItemAction>{ type: 'ADD_ITEM', columnID, value };
+}
+
+export function EditItemAction(
+  columnID: number,
+  itemID: number,
+  value?: string,
+  description?: string
+) {
+  return <EditItemAction>{ type: 'EDIT_ITEM', columnID, itemID, value, description };
 }
 
 export function DelItemAction(columnID: number, itemID: number) {

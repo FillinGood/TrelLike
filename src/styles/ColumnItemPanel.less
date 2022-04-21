@@ -1,4 +1,6 @@
 .column-item-panel {
+  display: flex;
+  flex-direction: column;
   z-index: 1;
   padding: 15px;
   border-radius: 7px;
@@ -37,6 +39,55 @@
       .panel-header--parent {
         color: hsl(0, 0%, 50%);
         font-size: 0.8em;
+      }
+    }
+  }
+  .panel-body {
+    display: flex;
+    justify-content: space-between;
+    .panel-content {
+      display: flex;
+      width: 66%;
+      flex-direction: column;
+    }
+    .panel-sidebar {
+      display: flex;
+      width: 33%;
+      flex-direction: column;
+    }
+  }
+  .panel-description {
+    margin-top: 20px;
+    .panel-description--header {
+      display: flex;
+      svg {
+        margin-top: 3px;
+        width: 20px;
+        margin-right: 10px;
+      }
+      & > div {
+        font-size: 1.2em;
+        font-weight: bold;
+      }
+    }
+    .panel-description--value {
+      padding: 5px;
+      word-break: break-all;
+      background: hsl(0, 0%, 95%);
+      color: hsl(0, 0%, 10%);
+      width: 100%;
+      margin-top: 5px;
+      &:focus {
+        background: hsl(0, 0%, 90%);
+        outline: none;
+      }
+      &:empty::before {
+        content: 'Add description';
+        color: hsl(0, 0%, 70%);
+        pointer-events: none;
+      }
+      &:hover {
+        background: hsl(0, 0%, 90%);
       }
     }
   }

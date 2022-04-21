@@ -3,6 +3,7 @@ import {
   AddItemAction,
   AnyAction,
   DelItemAction,
+  EditItemAction,
   InsertItemAction
 } from './actions';
 import { loadStore, saveStore } from './defaultStore';
@@ -30,6 +31,9 @@ export function reducer(store: StoreState | undefined, action: AnyAction): Store
     case 'INSERT_ITEM':
       insertItemReducer(copy, action);
       break;
+    case 'EDIT_ITEM':
+      editItemReducer(copy, action);
+      break;
     case 'ADD_COLUMN':
       addColumnReducer(copy, action);
       break;
@@ -44,9 +48,19 @@ function addItemReducer(store: StoreState, action: AddItemAction) {
   const item: ColumnItemType = {
     columnID: column.id,
     id: nextColumnItemId(),
-    value: action.value
+    value: action.value,
+    description: ''
   };
   addItem(column.items, item.id, item);
+}
+
+function editItemReducer(store: StoreState, action: EditItemAction) {
+  const column = getItem(store.columns, action.columnID);
+  if (!column) return;
+  const item = getItem(column.items, action.itemID);
+  if (!item) return;
+  if (action.value !== undefined) item.value = action.value;
+  if (action.description !== undefined) item.description = action.description;
 }
 
 function delItemReducer(store: StoreState, action: DelItemAction) {
@@ -61,7 +75,8 @@ function insertItemReducer(store: StoreState, action: InsertItemAction) {
   const item: ColumnItemType = {
     columnID: column.id,
     id: nextColumnItemId(),
-    value: action.value
+    value: action.value,
+    description: ''
   };
   addItem(column.items, item.id, item, action.index);
 }

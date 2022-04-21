@@ -4,8 +4,19 @@ import {
   faBars,
   faClone,
   faTrashCan,
-  faXmark
+  faXmark,
+  faList,
+  faSignature
 } from '@fortawesome/free-solid-svg-icons';
 import { faPenToSquare } from '@fortawesome/free-regular-svg-icons';
 
-library.add(faPlus, faPenToSquare, faBars, faClone, faTrashCan, faXmark);
+library.add(
+  faPlus,
+  faPenToSquare,
+  faBars,
+  faClone,
+  faTrashCan,
+  faXmark,
+  faList,
+  faSignature
+);

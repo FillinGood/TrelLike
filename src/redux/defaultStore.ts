@@ -12,6 +12,7 @@ interface StorageColumn {
 
 interface StorageColumnItem {
   value: string;
+  description: string;
 }
 
 function defaultStore(): StoreState {
@@ -35,7 +36,8 @@ export function loadStore() {
       const item: ColumnItemType = {
         columnID: column.id,
         id: nextColumnItemId(),
-        value: i.value
+        value: i.value,
+        description: i.description
       };
       addItem(column.items, item.id, item);
     }
@@ -54,7 +56,7 @@ export function saveStore(store: StoreState) {
       items: []
     };
     for (const i of col.items.values) {
-      const item: StorageColumnItem = { value: i.value };
+      const item: StorageColumnItem = { value: i.value, description: i.description };
       column.items.push(item);
     }
     storage.columns.push(column);
